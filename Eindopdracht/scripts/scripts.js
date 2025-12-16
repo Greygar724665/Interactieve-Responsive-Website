@@ -100,12 +100,8 @@ function main() {
     setPageTitle();
     togglePageTitleDisplay();
     suffixNavSVGs();
-    emailFieldColor()
-}
-
-function getInputFieldValue(id) {
-    value = document.getElementById(id).value;
-    print(value);
+    emailFieldColor();
+    inputLabels();
 }
 
 function printInput(id) {
@@ -123,18 +119,45 @@ function emailFieldColor() {
         fieldValue = emailField.value.trim();
         valid = emailValid(fieldValue);
         // print(emailField)
-        emailField.style.setProperty("color", valid ? "#252525" : "#FF4040", "important");
+        emailField.style.setProperty(
+            "color",
+            valid ? "#252525" : "#FF4040",
+            "important"
+        );
     });
 }
 
-// function inputLabels() {
-
-// }
+function inputLabels() {
+    ids = {
+        "email-input": "Email",
+        "name-input": "Name",
+        "subject-input": "Subject",
+        "content-input": "Content",
+    };
+    // console.log(Object.keys(ids));
+    console.log(ids);
+    for (const id of Object.keys(ids)) {
+        let field = document.getElementById(id);
+        field.addEventListener("input", () => {
+            if (field.value.length > 0) {
+                document
+                    .getElementById(ids[id])
+                    .style.setProperty("display", "flex", "important");
+            } else {
+                document
+                    .getElementById(ids[id])
+                    .style.setProperty("display", "none", "important");
+            }
+        });
+    }
+}
 
 function sendEmail() {
-    email = document.getElementById("email-input").value
-    userName = document.getElementById("name-input").value
-    subject = document.getElementById("subject-input").value
-    content = document.getElementById("content-input").value
-    print(`Name: ${userName}\nEmail: ${email}\nSubject: ${subject}\n\nContent:\n${content}`)
+    email = document.getElementById("email-input").value;
+    userName = document.getElementById("name-input").value;
+    subject = document.getElementById("subject-input").value;
+    content = document.getElementById("content-input").value;
+    print(
+        `Name: ${userName}\nEmail: ${email}\nSubject: ${subject}\n\nContent:\n${content}`
+    );
 }
