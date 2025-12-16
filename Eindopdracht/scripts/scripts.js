@@ -62,16 +62,17 @@ function updateNavSVGS() {
     const navLinks = document.querySelectorAll("#navitems-container a");
 
     navLinks.forEach((link) => {
+        // Een sort for loop die door elk element gaat
         const svg = link.querySelector("svg");
         if (svg) {
+            // Als het een <svg> is na de anchor
             if (window.matchMedia("(max-width: 767px)").matches) {
-                const pageName = getCurrentPage(link.href, true);
+                // Kijkt of het telefoon maat is
+                const pageName = getCurrentPage(link.href, true); // Krijgt de pagina van waar de svg staat
                 let span = link.querySelector("span");
-                if (!span) {
-                    span = document.createElement("span");
-                    span.style.marginLeft = "5px";
-                    link.appendChild(span);
-                }
+                span = document.createElement("span");
+                span.style.marginLeft = "5px";
+                link.appendChild(span);
                 span.textContent = `${pageName}`;
             } else {
                 // Remove any existing span elements for larger screens
@@ -99,9 +100,41 @@ function main() {
     setPageTitle();
     togglePageTitleDisplay();
     suffixNavSVGs();
+    emailFieldColor()
 }
 
 function getInputFieldValue(id) {
     value = document.getElementById(id).value;
     print(value);
+}
+
+function printInput(id) {
+    written = document.getElementById(id).value;
+    print(written);
+}
+
+emailValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// E-mail check
+function emailFieldColor() {
+    emailField = document.getElementById("email-input");
+    // if (emailField.length == 0) { emailField.style.setProperty("color", valid ? "#252525" : "#FF4040", "important"); return; }
+
+    emailField.addEventListener("input", () => {
+        fieldValue = emailField.value.trim();
+        valid = emailValid(fieldValue);
+        // print(emailField)
+        emailField.style.setProperty("color", valid ? "#252525" : "#FF4040", "important");
+    });
+}
+
+// function inputLabels() {
+
+// }
+
+function sendEmail() {
+    email = document.getElementById("email-input").value
+    userName = document.getElementById("name-input").value
+    subject = document.getElementById("subject-input").value
+    content = document.getElementById("content-input").value
+    print(`Name: ${userName}\nEmail: ${email}\nSubject: ${subject}\n\nContent:\n${content}`)
 }
