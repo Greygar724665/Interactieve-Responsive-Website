@@ -30,19 +30,19 @@
      <form class="contact-form">
         <div>
             <label id="Name" for="name-input">Naam:</label>
-            <input id="name-input" class="input-field" type="text" placeholder="Naam&#x2026;">
+            <input id="name-input" class="input-field" type="text" placeholder="Naam&#x2026;" required>
         </div>
         <div >
             <label id="Email" for="email-input">E-Mail:</label>
-            <input id="email-input" class="input-field" type="email" placeholder="E-Mail&#x2026;">
+            <input id="email-input" class="input-field" type="email" placeholder="E-Mail&#x2026;" required>
         </div>
         <div>
             <label id="Subject" for="subject-input">Onderwerp:</label>
-            <input id="subject-input" class="input-field" type="text" placeholder="Onderwerp&#x2026;">
+            <input id="subject-input" class="input-field" type="text" placeholder="Onderwerp&#x2026;" required>
         </div>
         <div style="height: 100%;">
             <label id="Content" for="content-input">Content:</label>
-            <textarea id="content-input" class="input-field" type="text" placeholder="Schrijf&#x2026;"></textarea>
+            <textarea id="content-input" class="input-field" type="text" placeholder="Schrijf&#x2026;" required></textarea>
         </div>
     </form>
     <button onclick="sendEmail()">send</button>

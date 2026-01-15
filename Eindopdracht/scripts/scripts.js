@@ -65,18 +65,21 @@ function updateNavSVGS() {
         // Een sort for loop die door elk element gaat
         const svg = link.querySelector("svg");
         if (svg) {
+            const existingSpan = link.querySelector("span");
             // Als het een <svg> is na de anchor
+            // Kijkt of het telefoon maat is
             if (window.matchMedia("(max-width: 767px)").matches) {
-                // Kijkt of het telefoon maat is
-                const pageName = getCurrentPage(link.href, true); // Krijgt de pagina van waar de svg staat
-                let span = link.querySelector("span");
-                span = document.createElement("span");
-                span.style.marginLeft = "5px";
-                link.appendChild(span);
-                span.textContent = `${pageName}`;
+                // Kijkt of er al een suffix is.
+                if (!existingSpan) {
+                    const pageName = getCurrentPage(link.href, true); // Krijgt de pagina van waar de svg staat
+                    let span = link.querySelector("span");
+                    span = document.createElement("span");
+                    span.style.marginLeft = "5px";
+                    link.appendChild(span);
+                    span.textContent = `${pageName}`;
+                }
             } else {
                 // Remove any existing span elements for larger screens
-                const existingSpan = link.querySelector("span");
                 if (existingSpan) {
                     link.removeChild(existingSpan);
                 }
