@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/stylesheet.css">
-    <script src="../scripts/scripts.js" defer></script>
     <title>Portfolio</title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <body>
     <p id="page-title">TITEL</p>
     <div class="d-flex justify-content-center">
-        <nav class="neue navbar navbar-expand-md">
+        <nav class="neue navbar navbar-expand-md" style="z-index: 9999 !important;">
             <button id="navbar-button" data-bs-toggle="collapse" data-bs-target="#navitems-container" class="navbar-toggler">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,10 +40,13 @@
             <input id="subject-input" class="input-field" type="text" placeholder="Onderwerp&#x2026;" required>
         </div>
         <div style="height: 100%;">
-            <label id="Content" for="content-input">Content:</label>
+            <label id="Content" for="content-input">Bericht:</label>
             <textarea id="content-input" class="input-field" type="text" placeholder="Schrijf&#x2026;" required></textarea>
+        <div>
+            <input id="send-button" type="button" value="Stuur" class="neue", style="border: none;" disabled>
+        </div>
         </div>
     </form>
-    <button onclick="sendEmail()">send</button>
+<script src="../scripts/scripts.js" defer></script>
 </body>
 </html>

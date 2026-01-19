@@ -105,6 +105,7 @@ function main() {
     suffixNavSVGs();
     emailFieldColor();
     inputLabels();
+    enableSendOnFilled();
 }
 
 function printInput(id) {
@@ -118,16 +119,25 @@ function emailFieldColor() {
     emailField = document.getElementById("email-input");
     // if (emailField.length == 0) { emailField.style.setProperty("color", valid ? "#252525" : "#FF4040", "important"); return; }
 
-    emailField.addEventListener("input", () => {
-        fieldValue = emailField.value.trim();
-        valid = emailValid(fieldValue);
-        // print(emailField)
-        emailField.style.setProperty(
-            "color",
-            valid ? "#252525" : "#FF4040",
-            "important"
-        );
-    });
+    // console.log({
+    //     type: typeof emailField,
+    //     waarde: emailField,
+    //     isEchtNull: emailField === null,
+    //     isTruthy: !!emailField,
+    // });
+
+    if (emailField) {
+        emailField.addEventListener("input", () => {
+            fieldValue = emailField.value.trim();
+            valid = emailValid(fieldValue);
+            // print(emailField)
+            emailField.style.setProperty(
+                "color",
+                valid ? "#252525" : "#FF4040",
+                "important"
+            );
+        });
+    }
 }
 
 function inputLabels() {
@@ -138,20 +148,22 @@ function inputLabels() {
         "content-input": "Content",
     };
     // console.log(Object.keys(ids));
-    console.log(ids);
     for (const id of Object.keys(ids)) {
         let field = document.getElementById(id);
-        field.addEventListener("input", () => {
-            if (field.value.length > 0) {
-                document
-                    .getElementById(ids[id])
-                    .style.setProperty("display", "flex", "important");
-            } else {
-                document
-                    .getElementById(ids[id])
-                    .style.setProperty("display", "none", "important");
-            }
-        });
+
+        if (field) {
+            field.addEventListener("input", () => {
+                if (field.value.length > 0) {
+                    document
+                        .getElementById(ids[id])
+                        .style.setProperty("display", "flex", "important");
+                } else {
+                    document
+                        .getElementById(ids[id])
+                        .style.setProperty("display", "none", "important");
+                }
+            });
+        }
     }
 }
 
@@ -163,4 +175,25 @@ function sendEmail() {
     print(
         `Name: ${userName}\nEmail: ${email}\nSubject: ${subject}\n\nContent:\n${content}`
     );
+}
+
+function enableSendOnFilled() {
+    const button = document.getElementById("send-button");
+    const nameInput = document.getElementById("name-input");
+    const emailInput = document.getElementById("email-input");
+    const subjectInput = document.getElementById("subject-input");
+    const contentInput = document.getElementById("content-input");
+    const fields = [nameInput, emailInput, subjectInput, contentInput];
+
+    fields.forEach((field) => {
+        if (field) {
+            field.addEventListener("input", () => {
+                button.disabled = !(
+                    fields.every((field) => field.value.trim()) &&
+                    emailValid(emailInput.value)
+                );
+            });
+        }
+    });
+    // button.disabled = fields.every(field => field.value.trim());
 }
